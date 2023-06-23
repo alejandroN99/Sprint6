@@ -1,6 +1,6 @@
-import { roll, total } from "../../src/application/rollService";
+import { roll, total, playGame } from "../../src/application/rollService";
 
-describe('Roll', () => {
+describe('roll', () => {
 
     test('should return a number between 1 and 6', () => {
 
@@ -19,5 +19,11 @@ describe('total', () => {
         const num2 = 3;
 
       expect(total(num1,num2)).toBe(6);
+    });
+});
+
+describe('playGame', () => {
+    test(`should return 'win' or 'lose'`, () => {
+        expect(playGame()).toMatch(/win|lose/);
     });
 });
