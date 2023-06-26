@@ -3,7 +3,9 @@ import {
 	updatePlayerName,
 	players,
 	getAllPlayers,
-	playerRoll
+	playerRoll,
+	deletePlayerRolls,
+	getAllPlayerRolls
 } from '../../src/application/controller';
 
 describe('Function createdPlayer', () => {
@@ -33,5 +35,17 @@ describe('Function getAllPlayers', () => {
 describe('Function playerRoll', () => {
 	test('should play the game', () => {
 		expect(playerRoll(0)).toEqual(players[0].rolls[0]);
+	});
+});
+
+describe('Function deletePlayerRolls', () => {
+	test('should delete all rolls from a player', () => {
+		expect(deletePlayerRolls(0)).toEqual((players[0].rolls = []));
+	});
+});
+
+describe('Function getAllPlayerRolls', () => {
+	test('should get all rolls from a player', () => {
+		expect(getAllPlayerRolls(0)).toEqual(players[0].rolls);
 	});
 });

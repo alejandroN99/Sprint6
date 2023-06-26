@@ -1,5 +1,6 @@
 import { Player } from '../domain/player';
 import { playGame } from './rollService';
+import { find } from '../infrastructure/utils/find';
 
 export const players: Player[] = [];
 
@@ -10,7 +11,7 @@ export const createdPlayer = (name: string) => {
 };
 
 export const updatePlayerName = (name: string, updateName: string) => {
-	const findPlayer = players.find((player) => player.name === name);
+	const findPlayer = find(players, 'name', name);
 	if (!findPlayer) {
 		return 'Player not found!';
 	}
@@ -26,7 +27,7 @@ export const getAllPlayers = () => {
 };
 
 export const playerRoll = (id: number) => {
-	const findPlayer = players.find((player) => player.id === id);
+	const findPlayer = find(players, 'id', id);
 	if (!findPlayer) {
 		return 'Player not found!';
 	}
@@ -34,5 +35,26 @@ export const playerRoll = (id: number) => {
 		const result = playGame();
 		findPlayer.rolls.push(result);
 		return result;
+	}
+};
+
+export const deletePlayerRolls = (id: number) => {
+	const findPlayer = find(players, 'id', id);
+	if (!findPlayer) {
+		return 'Player not found!';
+	}
+	else {
+		findPlayer.rolls = [];
+		return findPlayer.rolls;
+	}
+};
+
+export const getAllPlayerRolls = (id: number) => {
+	const findPlayer = find(players, 'id', id);
+	if (!findPlayer) {
+		return 'Player not found!';
+	}
+	else {
+		return findPlayer.rolls;
 	}
 };
