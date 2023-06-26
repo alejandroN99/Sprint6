@@ -11,9 +11,6 @@ export const playGame = (): string => {
     const roll2 = roll();
     const totalRoll = total(roll1, roll2);
     
-    if (totalRoll === 7) {
-        return 'win';
-    } else {
-        return 'lose';
-    }
-}
+    const result = (totalRoll === 7)?'You win!':'You lose!';
+    return result;
+};
