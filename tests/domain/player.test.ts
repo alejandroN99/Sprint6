@@ -7,7 +7,8 @@ describe('class Player', () => {
 			date: '',
 			id: 0,
 			name: 'Alejandro',
-			rolls: []
+			rolls: [],
+			winPercentage: 0
 		};
 
 		expect(result).toEqual(expectedResult);

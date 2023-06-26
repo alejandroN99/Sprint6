@@ -17,7 +17,6 @@ export const updatePlayerName = (name: string, updateName: string) => {
 	}
 	else {
 		findPlayer.name = updateName;
-		console.log(players);
 		return 'Update player name successfully!';
 	}
 };
@@ -56,5 +55,18 @@ export const getAllPlayerRolls = (id: number) => {
 	}
 	else {
 		return findPlayer.rolls;
+	}
+};
+
+export const getWinPercentage = (id: number) => {
+	const findPlayer = find(players, 'id', id);
+	if (!findPlayer) {
+		return 'Player not found!';
+	}
+	else {
+		const wins = findPlayer.rolls.filter((roll: any) => roll.result === 'You win!');
+		const winPercentage = wins.length / findPlayer.rolls.length * 100;
+		findPlayer.winPercentage = winPercentage;
+		return winPercentage;
 	}
 };
