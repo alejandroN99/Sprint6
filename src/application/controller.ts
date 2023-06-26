@@ -1,6 +1,6 @@
 import { Player } from '../domain/player';
 import { playGame } from './rollService';
-import { find } from '../infrastructure/utils/find';
+import { find } from '../infrastructure/utilities/find';
 
 export const players: Player[] = [];
 
