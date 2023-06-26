@@ -4,6 +4,7 @@ export class Player {
 	public name: string;
 	private date: string;
 	public rolls: object[] = [];
+	public winPercentage: number = 0;
 
 	constructor(name: string) {
 		this.id = 0;
