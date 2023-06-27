@@ -1,4 +1,3 @@
-import { roll } from './../application/rollService';
 export class Player {
 	public id: number;
 	public name: string;

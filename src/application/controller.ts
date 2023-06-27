@@ -21,7 +21,7 @@ export const updatePlayerName = (id: number, updateName: string) => {
 	}
 };
 
-export const getAllPlayers = () => {
+export const getAllPlayers = (): Player[] => {
 	return players;
 };
 
@@ -76,7 +76,8 @@ export const getRanking = (array: Player[]) => {
 	const sumWinPercentage = players.reduce((acc, player) => acc + player.winPercentage, 0);
 	const average = sumWinPercentage / players.length;
 
-	return { ranking, averageAllPlayers: average };
+
+	return { ranking, "averageAllPlayers": average };
 };
 
 export const getLosingPlayer = (array: Player[]) => {
