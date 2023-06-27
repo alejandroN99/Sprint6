@@ -2,7 +2,7 @@ import { roll } from './../application/rollService';
 export class Player {
 	public id: number;
 	public name: string;
-	private date: string;
+	public date: string;
 	public rolls: object[] = [];
 	public winPercentage: number = 0;
 
