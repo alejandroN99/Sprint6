@@ -7,7 +7,7 @@ export const players: Player[] = [];
 export const createPlayer = (name: string) => {
 	const player = new Player(name);
 	players.push(player);
-	return `Player ${player} created successfully!`;
+	return `Player ${name} created successfully!`;
 };
 
 export const updatePlayerName = (id: number, updateName: string) => {
@@ -50,7 +50,12 @@ export const deletePlayerRolls = (id: number) => {
 
 export const getAllPlayerRolls = (id: number) => {
 	const findPlayer = find(players, 'id', id);
-	findPlayer ? findPlayer.rolls : 'Player not found!';
+	if (!findPlayer) {
+		return 'Player not found!';
+	}
+	else {
+		return findPlayer.rolls;
+	}
 };
 
 export const getWinPercentage = (id: number) => {
