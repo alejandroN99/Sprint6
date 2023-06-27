@@ -6,7 +6,8 @@ import {
 	playerRoll,
 	deletePlayerRolls,
 	getAllPlayerRolls,
-	getWinPercentage
+	getWinPercentage,
+	getRanking
 } from '../../src/application/controller';
 
 describe('Controller tests', () => {

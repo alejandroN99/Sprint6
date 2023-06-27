@@ -1,6 +1,6 @@
 import { Player } from '../domain/player';
 import { playGame } from './rollService';
-import { find } from '../infrastructure/utilities/find';
+import { find } from '../domain/utilities/find';
 
 export const players: Player[] = [];
 
@@ -69,4 +69,12 @@ export const getWinPercentage = (id: number) => {
 		findPlayer.winPercentage = winPercentage;
 		return winPercentage;
 	}
+};
+
+export const getRanking = (array: Player[]) => {
+	const ranking = array.sort((a,b) => b.winPercentage - a.winPercentage);
+	const sumWinPercentage = players.reduce((acc,player) => acc + player.winPercentage,0);
+	const average = sumWinPercentage / players.length;
+
+	return {ranking, "averageAllPlayers": average};
 };
