@@ -4,20 +4,20 @@ import { find } from '../infrastructure/utilities/find';
 
 export const players: Player[] = [];
 
-export const createdPlayer = (name: string) => {
+export const createPlayer = (name: string) => {
 	const player = new Player(name);
 	players.push(player);
-	return 'Player created successfully!';
+	return `Player ${player} created successfully!`;
 };
 
-export const updatePlayerName = (name: string, updateName: string) => {
-	const findPlayer = find(players, 'name', name);
+export const updatePlayerName = (id: number, updateName: string) => {
+	const findPlayer = find(players, 'id', id);
 	if (!findPlayer) {
-		return 'Player not found!';
+		return `Player not found!`;
 	}
 	else {
 		findPlayer.name = updateName;
-		return 'Update player name successfully!';
+		return `Player is now called ${updateName}!`;
 	}
 };
 
@@ -50,12 +50,7 @@ export const deletePlayerRolls = (id: number) => {
 
 export const getAllPlayerRolls = (id: number) => {
 	const findPlayer = find(players, 'id', id);
-	if (!findPlayer) {
-		return 'Player not found!';
-	}
-	else {
-		return findPlayer.rolls;
-	}
+	findPlayer ? findPlayer.rolls : 'Player not found!';
 };
 
 export const getWinPercentage = (id: number) => {
