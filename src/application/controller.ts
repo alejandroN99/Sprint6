@@ -4,20 +4,20 @@ import { find } from '../domain/utilities/find';
 
 export const players: Player[] = [];
 
-export const createdPlayer = (name: string) => {
+export const createPlayer = (name: string) => {
 	const player = new Player(name);
 	players.push(player);
-	return 'Player created successfully!';
+	return `Player ${name} created successfully!`;
 };
 
-export const updatePlayerName = (name: string, updateName: string) => {
-	const findPlayer = find(players, 'name', name);
+export const updatePlayerName = (id: number, updateName: string) => {
+	const findPlayer = find(players, 'id', id);
 	if (!findPlayer) {
 		return 'Player not found!';
 	}
 	else {
 		findPlayer.name = updateName;
-		return 'Update player name successfully!';
+		return `Player name is now ${updateName}`;
 	}
 };
 
