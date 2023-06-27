@@ -76,5 +76,21 @@ export const getRanking = (array: Player[]) => {
 	const sumWinPercentage = players.reduce((acc, player) => acc + player.winPercentage, 0);
 	const average = sumWinPercentage / players.length;
 
+
 	return { ranking, "averageAllPlayers": average };
+};
+
+export const getLosingPlayer = (array: Player[]) => {
+	const ranking = getRanking(array).ranking;
+	const loser = ranking[ranking.length - 1];
+
+	console.log(`Loser: ${loser}`);
+	return loser;
+};
+
+export const getWinningPlayer = (array: Player[]) => {
+	const ranking = getRanking(array).ranking;
+	const winner = ranking[0];
+
+	return winner;
 };
