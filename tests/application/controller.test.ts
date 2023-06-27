@@ -6,8 +6,10 @@ import {
 	playerRoll,
 	deletePlayerRolls,
 	getAllPlayerRolls,
-	getWinPercentage
+	getWinPercentage,
+	getRanking
 } from '../../src/application/controller';
+
 
 describe('Function createdPlayer', () => {
 	test('', () => {
@@ -20,7 +22,7 @@ describe('Function createdPlayer', () => {
 
 describe('Function updatePlayerName', () => {
 	test('', () => {
-		const result = updatePlayerName('Juan', 'Pepe');
+		const result: string = updatePlayerName('Juan', 'Pepe');
 		const expectedResult = 'Update player name successfully!';
 
 		expect(result).toBe(expectedResult);
@@ -29,30 +31,72 @@ describe('Function updatePlayerName', () => {
 
 describe('Function getAllPlayers', () => {
 	test('should get all players', () => {
-		expect(getAllPlayers()).toEqual(players);
+
+		const result = getAllPlayers();
+		const expectedResult = players;
+
+		expect(result).toEqual(expectedResult);
 	});
 });
 
 describe('Function playerRoll', () => {
 	test('should play the game', () => {
-		expect(playerRoll(0)).toEqual(players[0].rolls[0]);
+
+		const result = playerRoll(0);
+		const expectedResult = players[0].rolls[0];
+		
+		expect(result).toEqual(expectedResult);
 	});
 });
 
 describe('Function getAllPlayerRolls', () => {
 	test('should get all rolls from a player', () => {
-		expect(getAllPlayerRolls(0)).toEqual(players[0].rolls);
+
+		const result = getAllPlayerRolls(0);
+		const expectedResult = players[0].rolls;
+
+		expect(result).toEqual(expectedResult);
 	});
 });
 
 describe('Get winPercentage', () => {
 	test('should return the win percentage of a player', () => {
-		expect(getWinPercentage(0)).toBe(players[0].winPercentage);
+
+		const result = getWinPercentage(0);
+		const expectedResult = players[0].winPercentage;
+
+		expect(result).toBe(expectedResult);
 	});
 });
 
 describe('Function deletePlayerRolls', () => {
 	test('should delete all rolls from a player', () => {
-		expect(deletePlayerRolls(0)).toEqual((players[0].rolls = []));
+
+		const result = deletePlayerRolls(0);
+		const expectedResult = players[0].rolls = [];
+
+
+		expect(result).toEqual(expectedResult);
 	});
 });
+
+describe('', () => {
+	test('', () => {
+		const result = getRanking(players);
+		const expectedResult = {
+		"averageAllPlayers": 0,
+		"ranking":  [
+			      {
+			     	"date": "",
+		       		"id": 0,
+			     	"name": "Pepe",
+			      	"rolls":[],
+			      	"winPercentage": 0,
+				},
+			   ]
+			};
+
+		expect(result).toEqual(expectedResult);
+	})
+});
+
