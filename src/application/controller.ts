@@ -9,6 +9,8 @@ export const players: Player[] = [];
 export const createPlayer = (req: Request, res: Response) => {
 	const player: Player = new Player(req.params.name);
 
+	req.params.name = "" ? req.params.name === "ANÒNIM" : req.params.name === req.params.name;
+
 	if (players.includes(player) && (req.params.name !== "ANÒNIM")) {
 		res.send(`Player ${req.params.name} already exists!`)
 	}
