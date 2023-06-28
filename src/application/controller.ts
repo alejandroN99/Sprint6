@@ -8,10 +8,22 @@ import { IRoll } from '../domain/utilities/IRoll';
 export const players: Player[] = [];
 
 export const createPlayer = (req: Request, res: Response) => {
-	const player: Player = new Player(req.params.name);
-	dataJson.players.push(player);
+	let name = req.params.name;
+	if (name === undefined) {
+		name = 'ANÒNIM';
+	}
 
-	res.status(200).send(`Player ${req.params.name} created successfully!`);
+	console.log(`Player name: ${name}`);
+
+	const player: Player = new Player(name);
+
+	if (dataJson.players.includes(player) && name !== 'ANÒNIM') {
+		res.send(`Player ${name} already exists!`);
+	}
+	else {
+		dataJson.players.push(player);
+		res.status(200).send(`Player ${name} created successfully!`);
+	}
 };
 
 export const updatePlayerName = (req: Request, res: Response) => {
@@ -19,6 +31,12 @@ export const updatePlayerName = (req: Request, res: Response) => {
 	const findPlayer = find(dataJson.players, 'id', id);
 	if (!findPlayer) {
 		return res.status(404).send('Player not found!');
+	}
+	else if (
+		find(dataJson.players, 'name', req.params.updateName) &&
+		req.params.updateName !== 'ANÒNIM'
+	) {
+		return res.status(409).send('Player name already exists!');
 	}
 	else {
 		findPlayer.name = req.params.updateName;
