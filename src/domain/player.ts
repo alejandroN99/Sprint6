@@ -1,8 +1,10 @@
+import {IRoll} from '../domain/utilities/IRoll'
+
 export class Player {
 	public id: number;
 	public name: string;
 	public date: string;
-	public rolls: object[];
+	public rolls: IRoll[];
 	public winPercentage: number;
 
 	constructor(name: string) {

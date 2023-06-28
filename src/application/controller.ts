@@ -13,14 +13,15 @@ export const createPlayer = (req: Request,res: Response) => {
 	res.send(`Player ${req.params.name} created successfully!`);
 };
 
-export const updatePlayerName = (id: number, updateName: string) => {
-	const findPlayer = find(players, 'id', id);
+export const updatePlayerName = (req: Request,res: Response) => {
+	const id = Number(req.params.id)
+	const findPlayer = find(dataJson.players, 'id', id);
 	if (!findPlayer) {
-		return 'Player not found!';
+		return res.status(404).send('Player not found!');
 	}
 	else {
-		findPlayer.name = updateName;
-		return `Player name is now ${updateName}`;
+		findPlayer.name = req.params.updateName;
+		return `Player name is now ${req.params.updateName}`;
 	}
 };
 
