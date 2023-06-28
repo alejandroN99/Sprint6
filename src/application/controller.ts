@@ -26,6 +26,9 @@ export const updatePlayerName = (req: Request, res: Response) => {
 	if (!findPlayer) {
 		return res.status(404).send('Player not found!');
 	}
+	if (players.includes(findPlayer.name = req.params.updateName) && (req.params.updateName !== "ANÒNIM")) {
+		res.send(`${req.params.updateName} is already in use!`);
+	}
 	else {
 		findPlayer.name = req.params.updateName;
 		return `Player name is now ${req.params.updateName}`;
