@@ -1,13 +1,16 @@
 import { Player } from '../domain/player';
 import { playGame } from './rollService';
 import { find } from '../domain/utilities/find';
+import { Request,Response } from 'express';
+import * as dataJson from '../../src/dataJson.json'
 
 export const players: Player[] = [];
 
-export const createPlayer = (name: string) => {
-	const player = new Player(name);
-	players.push(player);
-	return `Player ${name} created successfully!`;
+export const createPlayer = (req: Request,res: Response) => {
+	const player: Player = new Player(req.params.name);
+	dataJson.players.push(player);
+	
+	res.send(`Player ${req.params.name} created successfully!`);
 };
 
 export const updatePlayerName = (id: number, updateName: string) => {

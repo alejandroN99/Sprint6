@@ -1,0 +1,60 @@
+{
+    "players": [{
+            "date": "",
+            "id": 0,
+            "name": "Alejandro",
+            "rolls": [{
+                    "roll1": 1,
+                    "roll2": 5,
+                    "total": 6,
+                    "result": "You lose!"
+                },
+                {
+                    "roll1": 2,
+                    "roll2": 5,
+                    "total": 7,
+                    "result": "You win!"
+                }
+            ],
+            "winPercentage": 50
+        },
+        {
+            "date": "",
+            "id": 1,
+            "name": "Juan",
+            "rolls": [{
+                    "roll1": 1,
+                    "roll2": 6,
+                    "total": 7,
+                    "result": "You win!"
+                },
+                {
+                    "roll1": 2,
+                    "roll2": 5,
+                    "total": 7,
+                    "result": "You win!"
+                }
+            ],
+            "winPercentage": 100
+        },
+        {
+            "date": "",
+            "id": 2,
+            "name": "Axel",
+            "rolls": [{
+                    "roll1": 1,
+                    "roll2": 2,
+                    "total": 3,
+                    "result": "You lose!"
+                },
+                {
+                    "roll1": 2,
+                    "roll2": 5,
+                    "total": 7,
+                    "result": "You win!"
+                }
+            ],
+            "winPercentage": 50
+        }
+    ]
+}
