@@ -1,4 +1,4 @@
-export const roll = () => {
+export const roll = (): number => {
 	return Math.floor(Math.random() * 6) + 1;
 };
 
@@ -7,12 +7,12 @@ export const total = (roll1: number, roll2: number): number => {
 };
 
 export const playGame = (): object => {
-	const roll1 = roll();
-	const roll2 = roll();
-	const totalRoll = total(roll1, roll2);
-	const result = totalRoll === 7 ? 'You win!' : 'You lose!';
+	const roll1: number = roll();
+	const roll2: number = roll();
+	const totalRoll: number = total(roll1, roll2);
+	const result: string = totalRoll === 7 ? 'You win!' : 'You lose!';
 
-	const rollResult = {
+	const rollResult: object = {
 		roll1,
 		roll2,
 		totalRoll,

@@ -4,14 +4,14 @@ import { find } from '../domain/utilities/find';
 
 export const players: Player[] = [];
 
-export const createPlayer = (name: string) => {
+export const createPlayer = (name: string): string => {
 	const player = new Player(name);
 	players.push(player);
 	return `Player ${name} created successfully!`;
 };
 
-export const updatePlayerName = (id: number, updateName: string) => {
-	const findPlayer = find(players, 'id', id);
+export const updatePlayerName = (id: number, updateName: string): string => {
+	const findPlayer: Player | undefined = find(players, 'id', id);
 	if (!findPlayer) {
 		return 'Player not found!';
 	}
@@ -25,20 +25,20 @@ export const getAllPlayers = (): Player[] => {
 	return players;
 };
 
-export const playerRoll = (id: number) => {
-	const findPlayer = find(players, 'id', id);
+export const playerRoll = (id: number): string | object => {
+	const findPlayer: Player | undefined = find(players, 'id', id);
 	if (!findPlayer) {
 		return 'Player not found!';
 	}
 	else {
-		const result = playGame();
+		const result: object = playGame();
 		findPlayer.rolls.push(result);
 		return result;
 	}
 };
 
-export const deletePlayerRolls = (id: number) => {
-	const findPlayer = find(players, 'id', id);
+export const deletePlayerRolls = (id: number): string | object[] => {
+	const findPlayer: Player | undefined = find(players, 'id', id);
 	if (!findPlayer) {
 		return 'Player not found!';
 	}
@@ -48,8 +48,8 @@ export const deletePlayerRolls = (id: number) => {
 	}
 };
 
-export const getAllPlayerRolls = (id: number) => {
-	const findPlayer = find(players, 'id', id);
+export const getAllPlayerRolls = (id: number): string | object[] => {
+	const findPlayer: Player | undefined = find(players, 'id', id);
 	if (!findPlayer) {
 		return 'Player not found!';
 	}
@@ -58,23 +58,23 @@ export const getAllPlayerRolls = (id: number) => {
 	}
 };
 
-export const getWinPercentage = (id: number) => {
-	const findPlayer = find(players, 'id', id);
+export const getWinPercentage = (id: number): string | number => {
+	const findPlayer: Player | undefined = find(players, 'id', id);
 	if (!findPlayer) {
 		return 'Player not found!';
 	}
 	else {
-		const wins = findPlayer.rolls.filter((roll: any) => roll.result === 'You win!');
-		const winPercentage = wins.length / findPlayer.rolls.length * 100;
+		const wins: object[] = findPlayer.rolls.filter((roll: any) => roll.result === 'You win!');
+		const winPercentage: number = wins.length / findPlayer.rolls.length * 100;
 		findPlayer.winPercentage = winPercentage;
 		return winPercentage;
 	}
 };
 
 export const getRanking = (array: Player[]) => {
-	const ranking = array.sort((a, b) => b.winPercentage - a.winPercentage);
-	const sumWinPercentage = players.reduce((acc, player) => acc + player.winPercentage, 0);
-	const average = sumWinPercentage / players.length;
+	const ranking: Player[] = array.sort((a: Player, b: Player) => b.winPercentage - a.winPercentage);
+	const sumWinPercentage: number = players.reduce((acc: number, player: Player) => acc + player.winPercentage, 0);
+	const average: number = sumWinPercentage / players.length;
 
 
 	return { ranking, "averageAllPlayers": average };
