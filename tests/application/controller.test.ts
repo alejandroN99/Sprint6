@@ -12,7 +12,6 @@ import {
 import { Player } from '../../src/domain/player';
 
 describe('Controller tests', () => {
-
 	describe('Function createdPlayer', () => {
 		test('', () => {
 			const playerName: string = 'Juan';
@@ -35,7 +34,6 @@ describe('Controller tests', () => {
 
 	describe('Function getAllPlayers', () => {
 		test('should get all players', () => {
-
 			const result: Player[] = getAllPlayers();
 			const expectedResult: Player[] = players;
 
@@ -45,7 +43,6 @@ describe('Controller tests', () => {
 
 	describe('Function playerRoll', () => {
 		test('should play the game', () => {
-
 			const result: string | object = playerRoll(0);
 			const expectedResult: object = players[0].rolls[0];
 
@@ -55,7 +52,6 @@ describe('Controller tests', () => {
 
 	describe('Function getAllPlayerRolls', () => {
 		test('should get all rolls from a player', () => {
-
 			const result: string | object = getAllPlayerRolls(0);
 			const expectedResult: object[] = players[0].rolls;
 
@@ -65,7 +61,6 @@ describe('Controller tests', () => {
 
 	describe('Get winPercentage', () => {
 		test('should return the win percentage of a player', () => {
-
 			const result: string | number = getWinPercentage(0);
 			const expectedResult: number = players[0].winPercentage;
 
@@ -75,10 +70,8 @@ describe('Controller tests', () => {
 
 	describe('Function deletePlayerRolls', () => {
 		test('should delete all rolls from a player', () => {
-
 			const result: string | object = deletePlayerRolls(0);
-			const expectedResult: never[] = players[0].rolls = [];
-
+			const expectedResult: never[] = (players[0].rolls = []);
 
 			expect(result).toEqual(expectedResult);
 		});
@@ -88,19 +81,19 @@ describe('Controller tests', () => {
 		test('', () => {
 			const result: object = getRanking(players);
 			const expectedResult: object = {
-				"averageAllPlayers": 0,
-				"ranking": [
+				averageAllPlayers: 0,
+				ranking: [
 					{
-						"date": "",
-						"id": 0,
-						"name": "Pepe",
-						"rolls": [],
-						"winPercentage": 0,
-					},
+						date: '',
+						id: 0,
+						name: 'Pepe',
+						rolls: [],
+						winPercentage: 0
+					}
 				]
 			};
 
 			expect(result).toEqual(expectedResult);
-		})
+		});
 	});
 });
