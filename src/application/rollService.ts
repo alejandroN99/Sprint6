@@ -1,21 +1,23 @@
+import { IRoll } from "../domain/utilities/IRoll";
+
 export const roll = (): number => {
 	return Math.floor(Math.random() * 6) + 1;
 };
 
-export const total = (roll1: number, roll2: number): number => {
+export const calcTotal = (roll1: number, roll2: number): number => {
 	return roll1 + roll2;
 };
 
-export const playGame = (): Object => {
+export const playGame = (): IRoll => {
 	const roll1: number = roll();
 	const roll2: number = roll();
-	const totalRoll: number = total(roll1, roll2);
-	const result: string = totalRoll === 7 ? 'You win!' : 'You lose!';
+	const total: number = calcTotal(roll1, roll2);
+	const result: string = total === 7 ? 'You win!' : 'You lose!';
 
-	const rollResult: Object = {
+	const rollResult: IRoll = {
 		roll1,
 		roll2,
-		totalRoll,
+		total,
 		result
 	};
 
