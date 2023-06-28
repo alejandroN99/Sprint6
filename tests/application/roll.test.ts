@@ -3,7 +3,7 @@ import { roll, total, playGame } from '../../src/application/rollService';
 describe('Roll tests', () => {
 	describe('roll', () => {
 		test('should return a number between 1 and 6', () => {
-			const result = roll();
+			const result: number = roll();
 
 			expect(result).toBeGreaterThan(0);
 			expect(result).toBeLessThan(7);
@@ -13,8 +13,8 @@ describe('Roll tests', () => {
 
 	describe('total', () => {
 		test('should return the sum of two numbers', () => {
-			const num1 = 3;
-			const num2 = 3;
+			const num1: number = 3;
+			const num2: number = 3;
 
 			expect(total(num1, num2)).toBe(6);
 		});
