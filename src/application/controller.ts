@@ -1,19 +1,24 @@
 import { Player } from '../domain/player';
 import { playGame } from './rollService';
 import { find } from '../domain/utilities/find';
-import { Request,Response } from 'express';
+import { Request, Response } from 'express';
 import * as dataJson from '../../src/dataJson.json'
 
 export const players: Player[] = [];
 
-export const createPlayer = (req: Request,res: Response) => {
+export const createPlayer = (req: Request, res: Response) => {
 	const player: Player = new Player(req.params.name);
-	dataJson.players.push(player);
-	
-	res.send(`Player ${req.params.name} created successfully!`);
+
+	if (players.includes(player) && (req.params.name !== "ANÒNIM")) {
+		res.send(`Player ${req.params.name} already exists!`)
+	}
+	else {
+		dataJson.players.push(player);
+		res.send(`Player ${req.params.name} created successfully!`);
+	}
 };
 
-export const updatePlayerName = (req: Request,res: Response) => {
+export const updatePlayerName = (req: Request, res: Response) => {
 	const id = Number(req.params.id)
 	const findPlayer = find(dataJson.players, 'id', id);
 	if (!findPlayer) {
