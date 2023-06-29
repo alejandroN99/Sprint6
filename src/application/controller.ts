@@ -104,7 +104,7 @@ export const getWinPercentage = (req: Request, res: Response): object | number =
 	}
 };
 
-export const getRanking = (_req: Request, res: Response) => {
+export const getRanking = (_req: Request, res: Response): string | object => {
 	if (dataJson.players === undefined) {
 		return res.status(404).send('No players data found');
 	}
@@ -122,7 +122,7 @@ export const getRanking = (_req: Request, res: Response) => {
 	}
 };
 
-export const getLosingPlayer = (_req: Request, res: Response) => {
+export const getLosingPlayer = (_req: Request, res: Response): string | object => {
 	if (dataJson.players === undefined) {
 		return res.status(404).send('No players data found');
 	}
@@ -136,7 +136,7 @@ export const getLosingPlayer = (_req: Request, res: Response) => {
 	}
 };
 
-export const getWinningPlayer = (_req: Request, res: Response) => {
+export const getWinningPlayer = (_req: Request, res: Response): string | object => {
 	if (dataJson.players === undefined) {
 		return res.status(404).send('No players data found');
 	}
@@ -144,8 +144,8 @@ export const getWinningPlayer = (_req: Request, res: Response) => {
 		const ranking = dataJson.players.sort(
 			(a, b) => b.winPercentage - a.winPercentage
 		);
-		const loser = ranking[0];
+		const winner = ranking[0];
 
-		return res.status(200).send(loser);
+		return res.status(200).send(winner);
 	}
 };
