@@ -8,14 +8,14 @@ import { IRoll } from '../domain/utilities/IRoll';
 export const players: Player[] = [];
 
 export const createPlayer = (req: Request, res: Response) => {
-	let name = req.params.name;
+	let name: string = req.params.name;
 	if (name === undefined) {
 		name = 'ANÒNIM';
 	}
 
 	console.log(`Player name: ${name}`);
 
-	const player: Player = new Player(name);
+	const player = new Player(name);
 
 	if (dataJson.players.includes(player) && name !== 'ANÒNIM') {
 		res.send(`Player ${name} already exists!`);
@@ -46,7 +46,7 @@ export const updatePlayerName = (req: Request, res: Response) => {
 
 export const getAllPlayers = (_req: Request, res: Response): Object => {
 	const data: Object[] = [];
-	dataJson.players.forEach((player: Player) => {
+	dataJson.players.forEach((player) => {
 		data.push(player.name);
 		data.push(player.winPercentage);
 	});
@@ -55,7 +55,7 @@ export const getAllPlayers = (_req: Request, res: Response): Object => {
 
 export const playerRoll = (req: Request, res: Response): string | object => {
 	const id = Number(req.params.id);
-	const findPlayer: Player | undefined = find(dataJson.players, 'id', id);
+	const findPlayer = find(dataJson.players, 'id', id);
 	if (!findPlayer) {
 		return res.status(404).send('Player not found!');
 	}
@@ -68,7 +68,7 @@ export const playerRoll = (req: Request, res: Response): string | object => {
 
 export const deletePlayerRolls = (req: Request, res: Response): string | object => {
 	const id = Number(req.params.id);
-	const findPlayer: Player | undefined = find(dataJson.players, 'id', id);
+	const findPlayer = find(dataJson.players, 'id', id);
 	if (!findPlayer) {
 		return res.status(404).send('Player not found!');
 	}
@@ -80,7 +80,7 @@ export const deletePlayerRolls = (req: Request, res: Response): string | object 
 
 export const getAllPlayerRolls = (req: Request, res: Response): string | object => {
 	const id = Number(req.params.id);
-	const findPlayer: Player | undefined = find(dataJson.players, 'id', id);
+	const findPlayer = find(dataJson.players, 'id', id);
 
 	if (!findPlayer) {
 		return res.status(404).send('Player not found!');
@@ -92,13 +92,13 @@ export const getAllPlayerRolls = (req: Request, res: Response): string | object 
 
 export const getWinPercentage = (req: Request, res: Response): object | number => {
 	const id = Number(req.params.id);
-	const findPlayer: Player | undefined = find(dataJson.players, 'id', id);
+	const findPlayer = find(dataJson.players, 'id', id);
 	if (!findPlayer) {
 		return res.status(404).send('Player not found!');
 	}
 	else {
-		const wins: object[] = findPlayer.rolls.filter((roll: any) => roll.result === 'You win!');
-		const winPercentage: number = wins.length / findPlayer.rolls.length * 100;
+		const wins = findPlayer.rolls.filter((roll) => roll.result === 'You win!');
+		const winPercentage = wins.length / findPlayer.rolls.length * 100;
 		findPlayer.winPercentage = winPercentage;
 		return res.status(200).send(`${findPlayer.name} has win percentage: ${winPercentage}`);
 	}
@@ -109,14 +109,14 @@ export const getRanking = (_req: Request, res: Response) => {
 		return res.status(404).send('No players data found');
 	}
 	else {
-		const ranking: Player[] = dataJson.players.sort(
-			(a: Player, b: Player) => b.winPercentage - a.winPercentage
+		const ranking = dataJson.players.sort(
+			(a, b) => b.winPercentage - a.winPercentage
 		);
-		const sumWinPercentage: number = players.reduce(
-			(acc: number, player: Player) => acc + player.winPercentage,
+		const sumWinPercentage = players.reduce(
+			(acc, player) => acc + player.winPercentage,
 			0
 		);
-		const average: number = sumWinPercentage / players.length;
+		const average = sumWinPercentage / players.length;
 
 		return res.status(200).send({ ranking, averageAllPlayers: average });
 	}
@@ -127,8 +127,8 @@ export const getLosingPlayer = (_req: Request, res: Response) => {
 		return res.status(404).send('No players data found');
 	}
 	else {
-		const ranking: Player[] = dataJson.players.sort(
-			(a: Player, b: Player) => b.winPercentage - a.winPercentage
+		const ranking = dataJson.players.sort(
+			(a, b) => b.winPercentage - a.winPercentage
 		);
 		const loser = ranking[ranking.length - 1];
 
@@ -141,8 +141,8 @@ export const getWinningPlayer = (_req: Request, res: Response) => {
 		return res.status(404).send('No players data found');
 	}
 	else {
-		const ranking: Player[] = dataJson.players.sort(
-			(a: Player, b: Player) => b.winPercentage - a.winPercentage
+		const ranking = dataJson.players.sort(
+			(a, b) => b.winPercentage - a.winPercentage
 		);
 		const loser = ranking[0];
 
