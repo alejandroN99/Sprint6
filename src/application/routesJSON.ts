@@ -1,15 +1,23 @@
-import express from 'express';
-import {
-	getAllPlayers
-} from './controllerSequealize';
+// import express from 'express';
+// import {
+// 	getAllPlayers,
+// 	createPlayer,
+// 	updatePlayerName,
+// 	playerRoll,
+// 	deletePlayerRolls,
+// 	getAllPlayerRolls,
+// 	getRanking,
+// 	getLosingPlayer,
+// 	getWinningPlayer
+// } from './controller';
 
-export const router = express.Router();
+// export const router = express.Router();
 
 // router.post('/players/:name?', createPlayer);
 
 // router.put('/players/:id/:updateName', updatePlayerName);
 
-router.get('/players', getAllPlayers);
+// router.get('/players', getAllPlayers);
 
 // router.post('/games/:id', playerRoll);
 

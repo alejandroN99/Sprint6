@@ -1,21 +1,21 @@
 import express from 'express';
 import cors from 'cors';
-import {router} from '../application/routes';
+import { router } from '../application/routesSQL';
 import db from './sequalize';
 
 export const app = express();
 
-export const server = app.listen('3306', () => {
-    console.log('App listening on port 3306!')
+export const server = app.listen('3000', () => {
+	console.log('App listening on port 3306!');
 });
 
 const dbConnection = async () => {
-    try {
-        await db.authenticate();
-        console.log('Database online');
-    } catch (error: any) {
-        throw new Error(error);
-    }
+	try {
+		await db.authenticate();
+		console.log('Database online');
+	} catch (error) {
+		throw new Error(error as string);
+	}
 };
 
 dbConnection();
