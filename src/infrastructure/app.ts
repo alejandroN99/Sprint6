@@ -1,11 +1,25 @@
 import express from 'express';
-import {router} from '../application/routes'
+import cors from 'cors';
+import {router} from '../application/routes';
+import db from './sequalize';
 
 export const app = express();
 
-export const server = app.listen(8080, () => {
-    console.log('App listening on port 8080!')
+export const server = app.listen('3306', () => {
+    console.log('App listening on port 3306!')
 });
 
+const dbConnection = async () => {
+    try {
+        await db.authenticate();
+        console.log('Database online');
+    } catch (error: any) {
+        throw new Error(error);
+    }
+};
+
+dbConnection();
+
 app.use(express.json());
-app.use('', router)
+app.use(cors());
+app.use('', router);
