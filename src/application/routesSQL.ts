@@ -5,7 +5,10 @@ import {
 	playerRoll,
 	getAllPlayerRolls,
 	updatePlayerName,
-	deletePlayerRolls
+	deletePlayerRolls,
+	getRanking,
+	getLosingPlayer,
+	getWinningPlayer
 } from './controllerSequealize';
 
 export const router = express.Router();
@@ -22,8 +25,8 @@ router.delete('/games/:id', deletePlayerRolls);
 
 router.get('/games/:id', getAllPlayerRolls);
 
-// router.get('/ranking', getRanking);
+router.get('/ranking', getRanking);
 
-// router.get('/ranking/loser', getLosingPlayer);
+router.get('/ranking/loser', getLosingPlayer);
 
-// router.get('/ranking/winner', getWinningPlayer);
+router.get('/ranking/winner', getWinningPlayer);
