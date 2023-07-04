@@ -9,7 +9,7 @@ import {
 	getRanking,
 	getLosingPlayer,
 	getWinningPlayer
-} from './controllerSequealize';
+} from './controllerSequelize';
 
 export const router = express.Router();
 

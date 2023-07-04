@@ -1,5 +1,5 @@
 import { DataTypes, Sequelize } from 'sequelize';
-import db from '../infrastructure/sequalize';
+import db from '../infrastructure/sequelize';
 
 export const PlayerDb = db.define('players', {
 	id: {
