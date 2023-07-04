@@ -103,7 +103,7 @@ export const getAverageWinPercentage = async () => {
 	const averageWinPercentage = (winPercentages.reduce((a: number, b: number) => a + b) /
 		winPercentages.length).toFixed(2);
 
-	return averageWinPercentage;
+	return Number(averageWinPercentage);
 };
 
 // get ranking
