@@ -1,15 +1,12 @@
 import express from 'express';
 import {
-	createPlayer,
-	deletePlayerRolls,
-	getAllPlayerRolls,
 	getAllPlayers,
-	getLosingPlayer,
-	getRanking,
-	getWinningPlayer,
+	createPlayer,
 	playerRoll,
-	updatePlayerName
-} from './controller';
+	getAllPlayerRolls,
+	updatePlayerName,
+	deletePlayerRolls
+} from './controllerSequealize';
 
 export const router = express.Router();
 
@@ -25,8 +22,8 @@ router.delete('/games/:id', deletePlayerRolls);
 
 router.get('/games/:id', getAllPlayerRolls);
 
-router.get('/ranking', getRanking);
+// router.get('/ranking', getRanking);
 
-router.get('/ranking/loser', getLosingPlayer);
+// router.get('/ranking/loser', getLosingPlayer);
 
-router.get('/ranking/winner', getWinningPlayer);
+// router.get('/ranking/winner', getWinningPlayer);
