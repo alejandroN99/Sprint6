@@ -86,3 +86,24 @@ export const getWinPercentage = async (req: Request, _res: Response) => {
 	PlayerDb.update({ winPercentage }, { where: { id } });
 	const updatedPlayer = await PlayerDb.findByPk(id);
 };
+
+// get ranking
+export const getRanking = async (_req: Request, res: Response) => {
+	const players = await PlayerDb.findAll({ order: [ [ 'winPercentage', 'DESC' ] ] });
+
+	return res.status(200).send(players);
+};
+
+// get losing player
+export const getLosingPlayer = async (_req: Request, res: Response) => {
+	const players = await PlayerDb.findAll({ order: [ [ 'winPercentage', 'ASC' ] ] });
+
+	return res.status(200).send(players[0]);
+};
+
+// get winning player
+export const getWinningPlayer = async (_req: Request, res: Response) => {
+	const players = await PlayerDb.findAll({ order: [ [ 'winPercentage', 'DESC' ] ] });
+
+	return res.status(200).send(players[0]);
+};
