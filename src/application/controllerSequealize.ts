@@ -31,6 +31,9 @@ export const playerRoll = async (req: Request, res: Response) => {
 	}
 	const roll = playGame(id);
 	await Roll.create(roll as any);
+
+	getWinPercentage(req, res);
+
 	return res.status(200).send(roll);
 };
 
@@ -60,4 +63,26 @@ export const updatePlayerName = async (req: Request, res: Response) => {
 	PlayerDb.update({ name: updateName }, { where: { id } });
 	const updatedPlayer = await PlayerDb.findByPk(id);
 	return res.status(200).send(updatedPlayer);
+};
+
+// delete player rolls
+export const deletePlayerRolls = async (req: Request, res: Response) => {
+	const id = Number(req.params.id);
+	const player = await PlayerDb.findByPk(id);
+	if (!player) {
+		return res.status(404).send('Player not found!');
+	}
+	await Roll.destroy({ where: { playerId: id } });
+	return res.status(200).send('Player rolls deleted!');
+};
+
+// get Win Percentage
+export const getWinPercentage = async (req: Request, _res: Response) => {
+	const id = Number(req.params.id);
+	const player = await PlayerDb.findByPk(id);
+	const rolls = await Roll.findAll({ where: { playerId: id } });
+	const wins = rolls.filter((roll: any) => roll.result === 'You win!');
+	const winPercentage = wins.length / rolls.length * 100;
+	PlayerDb.update({ winPercentage }, { where: { id } });
+	const updatedPlayer = await PlayerDb.findByPk(id);
 };

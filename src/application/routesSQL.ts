@@ -4,7 +4,8 @@ import {
 	createPlayer,
 	playerRoll,
 	getAllPlayerRolls,
-	updatePlayerName
+	updatePlayerName,
+	deletePlayerRolls
 } from './controllerSequealize';
 
 export const router = express.Router();
@@ -17,7 +18,7 @@ router.get('/players', getAllPlayers);
 
 router.post('/games/:id', playerRoll);
 
-// router.delete('/games/:id', deletePlayerRolls);
+router.delete('/games/:id', deletePlayerRolls);
 
 router.get('/games/:id', getAllPlayerRolls);
 

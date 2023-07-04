@@ -6,7 +6,7 @@ import db from './sequalize';
 export const app = express();
 
 export const server = app.listen('3000', () => {
-	console.log('App listening on port 3306!');
+	console.log('App listening on port 3000!');
 });
 
 const dbConnection = async () => {
