@@ -1,5 +1,3 @@
-import { IRoll } from '../domain/utilities/IRoll';
-
 export class Player {
 	public id: number;
 	public name: string;
