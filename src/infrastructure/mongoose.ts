@@ -1,15 +1,15 @@
+import express, { Request, Response } from 'express';
 import mongoose, { Schema, Document } from 'mongoose';
 
-mongoose.connect('mongodb://localhost:27017/prueba', {
-})
-    .then(() => {
-        console.log('Conexión exitosa a la base de datos');
-    })
-    .catch((error: Error) => {
-        console.error('Error al conectar a la base de datos:', error);
-    });
+const app = express();
+app.use(express.json());
 
-// Definir el tipo para el modelo de jugador
+mongoose.connect('mongodb://localhost:27017/prueba', {}).then(() => {
+    console.log('Conexión exitosa a la base de datos');
+}).catch((error: Error) => {
+    console.error('Error al conectar a la base de datos:', error);
+});
+
 interface IPlayer extends Document {
     id: number;
     name: string;
@@ -17,23 +17,19 @@ interface IPlayer extends Document {
     winPercentage: number;
 }
 
-// Definir el esquema para la secuencia de ID
 interface ISequence extends Document {
     name: string;
     value: number;
 }
 
-// Evento de conexión exitosa
 mongoose.connection.on('connected', () => {
     console.log('Conexión establecida a MongoDB');
 });
 
-// Evento de error en la conexión
 mongoose.connection.on('error', (error: Error) => {
     console.error('Error en la conexión a MongoDB:', error);
 });
 
-// Define el esquema para la secuencia de ID
 const sequenceSchema: Schema<ISequence> = new Schema({
     name: String,
     value: {
@@ -42,10 +38,8 @@ const sequenceSchema: Schema<ISequence> = new Schema({
     },
 });
 
-// Crea un modelo para la secuencia de ID
 const Sequence = mongoose.model<ISequence>('Sequence', sequenceSchema);
 
-// Define el esquema para el jugador
 const playerSchema: Schema<IPlayer> = new Schema({
     id: {
         type: Number,
@@ -59,61 +53,65 @@ const playerSchema: Schema<IPlayer> = new Schema({
     winPercentage: Number,
 });
 
-// Crea un modelo para el jugador
 const Player = mongoose.model<IPlayer>('Player', playerSchema);
 
-(async () => {
+app.post('/players', async (req: Request, res: Response) => {
     try {
-        // Obtiene la secuencia actualizada o crea una nueva si no existe
         let sequence: ISequence | null = await Sequence.findOne({ name: 'playerId' });
         if (!sequence) {
             sequence = new Sequence({ name: 'playerId' });
         }
 
-        // Asigna el ID al nuevo jugador
         const nuevoJugador: IPlayer = new Player({
             id: sequence.value,
-            name: 'John Doe',
+            name: req.body.name,
             winPercentage: 0,
         });
 
-        // Guarda el jugador en la base de datos
         await nuevoJugador.save();
 
-        // Incrementa el valor de la secuencia
         sequence.value += 1;
         await sequence.save();
 
-        console.log('Jugador creado exitosamente');
+        res.status(201).json({ message: 'Jugador creado exitosamente' });
     } catch (error) {
         console.error('Error al crear el jugador:', error);
+        res.status(500).json({ error: 'Error al crear el jugador' });
     }
-})();
+});
 
-Player.find()
-    .then((jugadores: IPlayer[]) => {
-        console.log('Jugadores encontrados:', jugadores);
-    })
-    .catch((error: Error) => {
-        console.error('Error al leer los jugadores:', error);
-    });
+app.get('/players', (_req: Request, res: Response) => {
+    Player.find()
+        .then((jugadores: IPlayer[]) => {
+            res.status(200).json(jugadores);
+        })
+        .catch((error: Error) => {
+            console.error('Error al leer los jugadores:', error);
+            res.status(500).json({ error: 'Error al leer los jugadores' });
+        });
+});
 
-async function deletePlayerById(playerId: number): Promise<void> {
+app.delete('/players/:id', async (req: Request, res: Response) => {
+    const playerId = parseInt(req.params.id);
+
     try {
-        // Busca y elimina al jugador por su ID
         const result = await Player.deleteOne({ id: playerId });
 
         if (result.deletedCount && result.deletedCount > 0) {
-            console.log('Jugador eliminado exitosamente');
+            res.status(200).json({ message: 'Jugador eliminado exitosamente' });
         } else {
-            console.log(`No se encontró ningún jugador con el ID ${playerId}`);
+            res.status(404).json({ error: `No se encontró ningún jugador con el ID ${playerId}` });
         }
     } catch (error) {
         console.error('Error al eliminar el jugador:', error);
+        res.status(500).json({ error: 'Error al eliminar el jugador' });
     }
-}
+});
 
-deletePlayerById(1);
+app.listen(3000, () => {
+    console.log('Servidor escuchando en el puerto 3000');
+});
+
 
 
 
