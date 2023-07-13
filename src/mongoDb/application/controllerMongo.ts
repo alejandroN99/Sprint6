@@ -53,7 +53,7 @@ export const getWinPercentage = async (req: Request, _res: Response) => {
 	const winPercentage = (wins.length / player.rolls.length * 100).toFixed(2);
 
 	player.winPercentage = winPercentage;
-    player.save();
+    await player.save();
 };
 
 export const updatePlayerName = async (req: Request, res: Response) => {
