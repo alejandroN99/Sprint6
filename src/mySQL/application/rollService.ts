@@ -1,4 +1,4 @@
-import { IRoll } from '../domain/utilities/IRoll';
+import { IRoll } from '../domain/utilities/IRoll'
 
 export const roll = () => {
 	return Math.floor(Math.random() * 6) + 1;
