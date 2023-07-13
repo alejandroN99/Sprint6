@@ -81,6 +81,7 @@ export const deletePlayerRolls = async (req: Request, res: Response) => {
 		return res.status(404).send('Player not found!');
 	}
 	await Roll.destroy({ where: { playerId: id } });
+	PlayerDb.update({ winPercentage: 0 }, { where: { id } });
 	return res.status(200).send('Player rolls deleted!');
 };
 
