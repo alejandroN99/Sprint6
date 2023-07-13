@@ -1,21 +1,29 @@
-import { name } from './../../node_modules/ci-info/index.d';
 import { Player } from '../domain/player';
 import { playGame } from './rollService';
-import { find } from '../domain/utilities/find';
 import { Request, Response } from 'express';
-import * as dataJson from '../../src/dataJson.json';
-import { IRoll } from '../domain/utilities/IRoll';
-import { PlayerDb, Roll } from '../domain/playerSequalize';
+import { PlayerDb, Roll } from '../domain/playerSequelize';
 
 export const getAllPlayers = async (_req: Request, res: Response) => {
 	const players = await PlayerDb.findAll();
+
+	if (!players) {
+		return res.status(404).send('Players not found!');
+	}
 
 	return res.status(200).send(players);
 };
 
 // create player
 export const createPlayer = async (req: Request, res: Response) => {
-	const { name } = req.params;
+	let { name } = req.params;
+
+	if (name === undefined) {
+		name = 'ANÒNIM';
+	}
+	else if (await PlayerDb.findOne({ where: { name } })) {
+		return res.status(409).send('Player name already exists!');
+	}
+
 	const player = new Player(name);
 	await PlayerDb.create(player as any);
 
@@ -73,25 +81,41 @@ export const deletePlayerRolls = async (req: Request, res: Response) => {
 		return res.status(404).send('Player not found!');
 	}
 	await Roll.destroy({ where: { playerId: id } });
+	PlayerDb.update({ winPercentage: 0 }, { where: { id } });
 	return res.status(200).send('Player rolls deleted!');
 };
 
 // get Win Percentage
 export const getWinPercentage = async (req: Request, _res: Response) => {
 	const id = Number(req.params.id);
-	const player = await PlayerDb.findByPk(id);
+
 	const rolls = await Roll.findAll({ where: { playerId: id } });
 	const wins = rolls.filter((roll: any) => roll.result === 'You win!');
-	const winPercentage = wins.length / rolls.length * 100;
+	const winPercentage = (wins.length / rolls.length * 100).toFixed(2);
+
 	PlayerDb.update({ winPercentage }, { where: { id } });
-	const updatedPlayer = await PlayerDb.findByPk(id);
+};
+
+// get average win percentage from all players
+export const getAverageWinPercentage = async () => {
+	const players = await PlayerDb.findAll();
+
+	const winPercentages: number[] = players.map((player: any) => player.winPercentage);
+	const averageWinPercentage = (winPercentages.reduce((a: number, b: number) => a + b) /
+		winPercentages.length).toFixed(2);
+
+	return Number(averageWinPercentage);
 };
 
 // get ranking
 export const getRanking = async (_req: Request, res: Response) => {
 	const players = await PlayerDb.findAll({ order: [ [ 'winPercentage', 'DESC' ] ] });
 
-	return res.status(200).send(players);
+	const averageWinPercentage = await getAverageWinPercentage();
+
+	const x = { players, averageWinPercentage };
+
+	return res.status(200).send(x);
 };
 
 // get losing player

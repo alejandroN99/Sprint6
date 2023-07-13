@@ -2,14 +2,14 @@ import express from 'express';
 import {
 	getAllPlayers,
 	createPlayer,
-	playerRoll,
-	getAllPlayerRolls,
 	updatePlayerName,
+	playerRoll,
 	deletePlayerRolls,
 	getRanking,
 	getLosingPlayer,
-	getWinningPlayer
-} from './controllerSequelize';
+	getWinningPlayer,
+	getAllPlayerRolls
+} from './controllerMongo';
 
 export const router = express.Router();
 

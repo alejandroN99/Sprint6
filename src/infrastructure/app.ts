@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import { router } from '../application/routesSQL';
-import db from './sequalize';
+import db from './sequelize';
 
 export const app = express();
 
