@@ -16,7 +16,7 @@ The technology used to build this app is:
 
 -Sequelize: a Node.js object relational mapper for SQL databases. It helps to reduce database building time and prevent common vulnerabilites (SQL injection).
 
--Mongoose: a Node.js object data modeling for MongoDB.
+-Mongoose: a Node.js object data modeling for MongoDB. It's purpose is similar to Sequelize.
 
 -Docker: a platform to bundle an application and all it's components and dependencies to ensure the application runs perfectly anywhere, without set-up issues.
 
@@ -32,8 +32,8 @@ The technology used to build this app is:
 
 On the root level there's a lot of config files (package.json, tsconfig.json, jest.config.json, node_modules folder...) and the main folders for the project. This folders are:
 
--src:
+-src: contains the main logic of the application. It has 2 main subfolders, 1 for MySQL and 1 for MongoDB. Each one has the necessary functions to store and manipulate the user data for the game to work and the logic of the game itself.
 
 -tests: contains all the tests made to ensure the app functions work as expected.
 
--website:
+-website: contains all the React assets to build the user front-end for the application.
