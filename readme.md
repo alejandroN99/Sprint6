@@ -34,6 +34,8 @@ On the root level there's a lot of config files (package.json, tsconfig.json, je
 
 -src: contains the main logic of the application. It has 2 main subfolders, 1 for MySQL and 1 for MongoDB. Each one has the necessary functions to store and manipulate the user data for the game to work and the logic of the game itself.
 
+-dist: contains the final javascript output from typescript.
+
 -tests: contains all the tests made to ensure the app functions work as expected.
 
 -website: contains all the React assets to build the user front-end for the application.
