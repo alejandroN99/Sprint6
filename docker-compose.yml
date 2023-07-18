@@ -1,22 +1,48 @@
-version: '3.7'
+version: '3.9'
 services:
   mysql_db_container:
-    image: mysql:latest
+    container_name: db
+    image: mysql
     command: --default-authentication-plugin=mysql_native_password
+    restart: always
     environment:
+      MYSQL_DATABASE: sprint6
       MYSQL_ROOT_PASSWORD: 4567
-      MYSQL_USER: root
-      MYSQL_PASSWORD: 4567
+      MYSQL_USER: juan
+      MYSQL_PASSWORD: 1234
     ports:
       - 3306:3306
+    
     volumes:
-      - ./mysql_db_data_container:/var/lib/mysql
+      - db-config:/etc/mysql
+      - db-data:/var/lib/mysql
+      - ./db/backup/files/:/data_backup/data
   adminer_container:
     image: adminer:latest
     environment:
       ADMINER_DEFAULT_SERVER: mysql_db_container
     ports:
       - 8080:8080
+  app:
+    container_name: app
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    image: node-mysql-app
+    depends_on:
+      - mysql_db_container
+    ports:
+      - 3000:3000
+  vite_docker:
+    container_name: vite_docker
+    build:
+      context: ./website
+      dockerfile: Dockerfile
+    depends_on:
+      - app
+    ports:
+      - 8000:8000
 
-# volumes:
-#   mysql_db_data_container:
+volumes: 
+  db-config:
+  db-data:

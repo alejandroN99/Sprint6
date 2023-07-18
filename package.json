@@ -7,9 +7,8 @@
     "test": "jest",
     "lint": "eslint --ext .ts ./src",
     "lint:fix": "eslint --fix --ext .ts ./src",
-    "dev": "NODE_ENV=dev ts-node-dev --inspect --respawn --pretty --transpile-only ./src/infrastructure/app.ts",
     "build": "rimraf dist && tsc",
-    "start": "ts-node ./src/mySQL/infrastructure/app.ts"
+    "start": "node ./dist/src/mySQL/infrastructure/app.js" 
   },
   "keywords": [],
   "author": "",

@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import './App.css'
 import axios from 'axios';
-import { Player } from '../../src/domain/player';
-import { IRoll } from '../../src/domain//utilities/IRoll';
+import { Player } from './domain/player';
+import { IRoll } from './domain/IRoll';
 
 
 function App() {
