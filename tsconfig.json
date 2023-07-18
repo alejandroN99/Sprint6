@@ -12,7 +12,10 @@
       "resolveJsonModule": true
     },
     "include": [
-      "./src//*",
-      "./tests//*"
-, "src/infrastructure/app.ts", "src/mySQL/application"    ]
+      "src/**/*"
+    ],
+    "exclude": [
+      "node_modules",
+      "**/*.spec.ts"
+    ]
   }

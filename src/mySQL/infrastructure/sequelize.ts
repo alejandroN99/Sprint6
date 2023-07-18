@@ -1,9 +1,8 @@
 import { Sequelize } from 'sequelize';
 
-const db = new Sequelize('db_sprint6', 'root', '4567', {
-	host: 'localhost',
+const db = new Sequelize('sprint6', 'juan', '1234', {
+	host: 'db',
 	dialect: 'mysql'
-	//logging: false
 });
 
 export default db;
