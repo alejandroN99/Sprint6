@@ -1,0 +1,3 @@
+CREATE DATABASE IF NOT EXISTS sprint6;
+CREATE USER 'juan1'@'%' IDENTIFIED BY '1234';
+GRANT ALL privileges ON * . * TO 'juan1'@'%';
