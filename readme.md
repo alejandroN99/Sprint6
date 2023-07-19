@@ -1,8 +1,27 @@
-# Dice game
+# Dice Game (Sprint 6)
 
-## Purpose
+## Description
 
-This application allows players to enjoy a nice dice match. Players need to sign up (or be anonymous) so they can roll 2 dices. If the sum between the 2 numbers equals 7, the player wins. Anything else is a loss.
+This application allows you to add players and have them roll 2 dice. If the sum between the 2 numbers equals 7, the player wins. Anything else is a loss.
+
+## Installation 
+
+To install this application, you need to have Docker installed on your computer. If you don't have it, you can download it from [here](https://www.docker.com/products/docker-desktop).
+
+Once you have Docker installed, you need to clone this repository. You can do it by downloading the zip file or by running this command on your terminal:
+
+```bash
+git clone https://github.com/alejandroN99/Sprint6.git
+```
+
+Once you have the repository on your computer, you need to open a terminal on the root folder of the project and run this command:
+
+```bash
+docker-compose build
+docker-compose up
+```
+
+This will build the images for the MySQL and MongoDB databases and run them. Once they are running you can access the app at http://localhost:8000/
 
 ## Stack
 
@@ -39,3 +58,4 @@ On the root level there's a lot of config files (package.json, tsconfig.json, je
 -tests: contains all the tests made to ensure the app functions work as expected.
 
 -website: contains all the React assets to build the user front-end for the application.
+
