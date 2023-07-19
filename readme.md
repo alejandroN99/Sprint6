@@ -177,6 +177,8 @@ Please note that you may need to replace `:id` and `:updateName` with the actual
 
 ### MySQL
 
+<img width="367" alt="Screenshot 2023-07-19 at 10 18 48" src="https://github.com/alejandroN99/Sprint6/assets/36825759/c7ce084f-4ce8-41c7-82da-38b9793bba95">
+
 Table: players
 
 id (Primary Key, Integer): The unique identifier for each player.
