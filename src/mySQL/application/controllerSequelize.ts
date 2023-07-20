@@ -101,6 +101,10 @@ export const getWinPercentage = async (req: Request, _res: Response) => {
 export const getAverageWinPercentage = async () => {
 	const players= await PlayerDb.findAll();
 
+	if (players.length === 0 || !players) {
+		return 0;
+	}
+
 	const winPercentages: number[] = players.map((player: any) => player.winPercentage);
 	const averageWinPercentage = (winPercentages.reduce((a: number, b: number) => a + b) /
 		winPercentages.length).toFixed(2);
@@ -132,3 +136,5 @@ export const getWinningPlayer = async (_req: Request, res: Response) => {
 
 	return res.status(200).send(players[0]);
 };
+
+
