@@ -1,7 +1,19 @@
-import { DataTypes, Sequelize } from 'sequelize';
+import { DataTypes,Model, Sequelize } from 'sequelize';
 import db from '../infrastructure/sequelize';
 
-export const PlayerDb = db.define('players', {
+interface PlayerAttributes {
+	id: number;
+	name: string;
+	date: string;
+	winPercentage: number;
+	createdAt: Date;
+	updatedAt: Date;
+}
+
+export interface PlayerInstance extends Model<PlayerAttributes>, PlayerAttributes {}
+
+
+export const PlayerDb = db.define<PlayerInstance>('players', {
 	id: {
 		type: DataTypes.INTEGER,
 		primaryKey: true,
@@ -27,8 +39,20 @@ export const PlayerDb = db.define('players', {
 		allowNull: false
 	}
 });
+interface IRollAttributes{
+	id: number;
+	roll1: number;
+	roll2: number;
+	total: number;
+	result: string;
+	createdAt: Date;
+	updatedAt: Date;
+	playerId: number;
+};
 
-export const Roll = db.define('rolls', {
+export interface IRollInstance extends Model<IRollAttributes>, IRollAttributes {}
+
+export const Roll = db.define<IRollInstance>('rolls', {
 	id: {
 		type: DataTypes.INTEGER,
 		primaryKey: true,

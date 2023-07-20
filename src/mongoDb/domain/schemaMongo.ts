@@ -1,15 +1,15 @@
 import mongoose from "mongoose";
 import { IRollMongo } from "./IRollMongo";
 
-export interface IPlayer {
-    id: String,
-    name: String,
-    date: Date,
-    rolls:IRollMongo[],
-    winPercentage: Number,
-    createdAt: Date,
-    updatedAt: Date
-}
+// Interfaz para representar un jugador
+export interface IPlayer extends mongoose.Document {
+  name: string;
+  date: Date;
+  rolls: IRollMongo[];
+  winPercentage: number;
+  createdAt: Date;
+  updatedAt: Date;
+};
 
 export const PlayerSchema = new mongoose.Schema<IPlayer>({
   name: {
@@ -39,4 +39,4 @@ export const PlayerSchema = new mongoose.Schema<IPlayer>({
   }
 });
 
-export const playerModel =  mongoose.model('Player', PlayerSchema);
+export const playerModel: mongoose.Model<IPlayer> =  mongoose.model<IPlayer>('Player', PlayerSchema);
