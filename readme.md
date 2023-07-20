@@ -12,7 +12,16 @@ To install this application, you need to have Docker installed on your computer.
 
 You will also need MySQLWorkbench to create a user for the MySQL database. You can download it from [here](https://dev.mysql.com/downloads/workbench/).
 
-Once you have Docker and MYSQLWorkbench installed, you need to clone this repository. You can do it by downloading the zip file or by running this command on your terminal:
+Once installed open the MySQLWorkbench app. Create a new connection. Keep the default setting. `Hostname: 127.0.0.1`, `Port: 3306` you can name the connection `sprint6`. You will be prompted to create a password for the root user. Once you have done that, you can create a new user by clicking on the `Users and Privileges` tab. Click on the Add Account button. Enter a username and password. Make sure the account has all privileges.
+
+You can also run the following queries to create the database and user:  
+```sql
+CREATE DATABASE IF NOT EXISTS sprint6;
+CREATE USER 'juan1'@'%' IDENTIFIED BY '1234';
+GRANT ALL privileges ON * . * TO 'juan1'@'%';
+``````
+
+Once you have Docker and MYSQLWorkbench setup, you need to clone this repository. You can do it by downloading the zip file or by running this command on your terminal:
 
 ```bash
 git clone https://github.com/alejandroN99/Sprint6.git
