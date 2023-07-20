@@ -51,7 +51,7 @@ export const getWinPercentage = async (req: Request, _res: Response) => {
 
     if (!player) {
 		return _res.status(404).send('Player not found!');
-	};
+	}
 
 	const wins = player.rolls.filter((roll) => roll.result === 'You win!');
 	const winPercentage = (wins.length / player.rolls.length * 100).toFixed(2);
@@ -95,7 +95,7 @@ export const deletePlayerRolls = async (req: Request, res: Response) => {
 
     if(!player) {
         return res.status(404).send('Player not found!');
-    };
+    }
 
     player.rolls = [];
     player.winPercentage = 0;

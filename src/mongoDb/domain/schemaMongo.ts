@@ -9,7 +9,7 @@ export interface IPlayer extends mongoose.Document {
   winPercentage: number;
   createdAt: Date;
   updatedAt: Date;
-};
+}
 
 export const PlayerSchema = new mongoose.Schema<IPlayer>({
   name: {

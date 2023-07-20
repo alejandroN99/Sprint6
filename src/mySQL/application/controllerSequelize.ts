@@ -92,7 +92,7 @@ export const getWinPercentage = async (req: Request, _res: Response) => {
 
 	const rolls = await Roll.findAll({ where: { playerId: id } });
 	const wins = rolls.filter((roll: any) => roll.result === 'You win!');
-	const winPercentage: number= Number((wins.length / rolls.length * 100).toFixed(2));
+	const winPercentage = Number((wins.length / rolls.length * 100).toFixed(2));
 
 	PlayerDb.update({ winPercentage }, { where: { id } });
 };

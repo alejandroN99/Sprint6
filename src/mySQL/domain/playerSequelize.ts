@@ -48,7 +48,7 @@ interface IRollAttributes{
 	createdAt: Date;
 	updatedAt: Date;
 	playerId: number;
-};
+}
 
 export interface IRollInstance extends Model<IRollAttributes>, IRollAttributes {}
 

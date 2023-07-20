@@ -13,5 +13,5 @@ export class Player {
 		this.date = '';
         this.rolls = [];
 		this.winPercentage = 0;
-	};
-};
+	}
+}
