@@ -43,6 +43,24 @@ This will build the images for the MySQL and MongoDB databases and run them.
 
 Once they are running you can access the app at http://localhost:8000/
 
+## MongoDB
+
+You can also use this app with MongoDB to do so you need to install MongoDB Compass. You can download it from [here](https://www.mongodb.com/try/download/compass).
+
+Once you have it installed create a "New Connection" with the following URI:
+`mongodb://localhost:27017`
+
+Then you need to open a terminal on the root folder of the project and run this command to start the sever:
+
+```bash
+npm run mongo
+```
+
+and to start the front-end, in a new terminal run:
+```bash
+npm run front
+```
+
 ## API Endpoints
 
 ### Create a new player
